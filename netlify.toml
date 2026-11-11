@@ -1,0 +1,5 @@
+# This is a static HTML site; no build step is needed.
+# Overrides the auto-detected (incorrect) Expo build settings from the Netlify UI.
+[build]
+  command = "echo 'Static site - no build required'"
+  publish = "."
