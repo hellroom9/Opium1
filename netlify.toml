@@ -1,6 +1,10 @@
 # This is a plain static site (no package.json / no build step).
-# app.json is a Heroku-style app manifest, not an Expo config, so override the
-# auto-detected Expo build settings and publish the repository root as-is.
+# app.json is a Heroku-style app manifest, not an Expo config, so Netlify's
+# auto-detected Expo settings (`expo export -p web`, publish `dist`) don't apply.
+#
+# The build step simply assembles the static files into `dist`, so the publish
+# directory exists no matter whether the UI setting or this file wins.
+# Files are hard-linked (fast, no extra disk usage) with a plain copy fallback.
 [build]
-  command = "echo 'Static site - no build step required'"
-  publish = "."
+  command = "rm -rf dist && mkdir dist && find . -mindepth 1 -maxdepth 1 ! -name dist ! -name .git ! -name .netlify ! -name .github ! -name netlify.toml -exec sh -c 'cp -al \"$1\" dist/ 2>/dev/null || cp -R \"$1\" dist/' _ {} \\;"
+  publish = "dist"
