@@ -1,0 +1,6 @@
+# This is a plain static site (no package.json / no build step).
+# app.json is a Heroku-style app manifest, not an Expo config, so override the
+# auto-detected Expo build settings and publish the repository root as-is.
+[build]
+  command = "echo 'Static site - no build step required'"
+  publish = "."
