@@ -1,0 +1,19 @@
+# This is a plain static HTML site — there is no Expo/Node project to build.
+# These settings override the dashboard build settings (which pointed at
+# `expo export -p web` / `dist` and caused deploys to fail).
+[build]
+  base = ""
+  publish = "."
+  command = "echo 'Static site: no build step required'"
+
+# Unity WebGL builds ship pre-compressed .unityweb files and wasm; make sure
+# they are served with sensible types.
+[[headers]]
+  for = "/*.wasm"
+  [headers.values]
+    Content-Type = "application/wasm"
+
+[[headers]]
+  for = "/*.unityweb"
+  [headers.values]
+    Content-Type = "application/octet-stream"
